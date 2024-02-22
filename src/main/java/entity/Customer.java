@@ -1,7 +1,7 @@
 package entity;
 
 public class Customer {
-    private Long id;
+    private int id;
     private String name;
     private String surname;
     private String email;
@@ -11,7 +11,11 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(Long id, String name, String surname, String email, String phone, double balance) {
+    public Customer(int id) {
+        this.id = id;
+    }
+
+    public Customer(int id, String name, String surname, String email, String phone, double balance) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -28,11 +32,14 @@ public class Customer {
         this.balance = balance;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id){ this.id = id;}
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }

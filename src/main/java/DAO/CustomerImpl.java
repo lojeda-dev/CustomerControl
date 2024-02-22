@@ -15,18 +15,18 @@ public class CustomerImpl implements ICustomerDAO {
     private static final String DELETE = "DELETE FROM customers WHERE id = ?";
 
     private Connection con = null;
-    private ResultSet rs = null;
     private PreparedStatement ps = null;
 
     @Override
     public List<Customer> findAll() throws SQLException {
         con = SQLconnection.getConnection();
         ps = con.prepareStatement(SELECT);
+        ResultSet rs = null;
         rs = ps.executeQuery();
         List<Customer> customers = new ArrayList<>();
         while (rs.next()) {
             Customer customer = new Customer();
-            customer.setId(rs.getLong("id"));
+            customer.setId(rs.getInt("id"));
             customer.setName(rs.getString("name"));
             customer.setSurname(rs.getString("surname"));
             customer.setEmail(rs.getString("email"));
@@ -42,7 +42,7 @@ public class CustomerImpl implements ICustomerDAO {
     }
 
     @Override
-    public Customer save(Customer customer) throws SQLException {
+    public void save(Customer customer) throws SQLException {
         con = SQLconnection.getConnection();
         ps = con.prepareStatement(INSERT);
         ps.setString(1, customer.getName());
@@ -53,17 +53,30 @@ public class CustomerImpl implements ICustomerDAO {
         ps.executeUpdate();
         SQLconnection.close(ps);
         SQLconnection.close(con);
-
-        return customer;
     }
 
     @Override
-    public Customer update(Long id) {
-        return null;
+    public void update(Customer customer) throws SQLException {
+        con = SQLconnection.getConnection();
+        ps = con.prepareStatement(UPDATE);
+        ps.setString(1, customer.getName());
+        ps.setString(2, customer.getSurname());
+        ps.setString(3, customer.getEmail());
+        ps.setString(4, customer.getPhone());
+        ps.setDouble(5, customer.getBalance());
+        ps.setInt(6, customer.getId());
+        ps.executeUpdate();
+        SQLconnection.close(ps);
+        SQLconnection.close(con);
     }
 
     @Override
-    public void deleteById(Long id) {
-
+    public void deleteById(Customer customer) throws SQLException {
+        con = SQLconnection.getConnection();
+        ps = con.prepareStatement(DELETE);
+        ps.setInt(1,customer.getId());
+        ps.execute();
+        SQLconnection.close(ps);
+        SQLconnection.close(con);
     }
 }

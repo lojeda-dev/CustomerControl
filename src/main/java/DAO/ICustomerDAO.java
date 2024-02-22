@@ -8,9 +8,9 @@ import java.util.List;
 public interface ICustomerDAO {
     List<Customer> findAll() throws SQLException;
 
-    Customer update(Long id) throws SQLException;
+    void update(Customer customer) throws SQLException;
 
-    Customer save(Customer Customer) throws SQLException;
+    void save(Customer customer) throws SQLException;
 
-    void deleteById(Long id) throws SQLException;
+    void deleteById(Customer customer) throws SQLException;
 }
