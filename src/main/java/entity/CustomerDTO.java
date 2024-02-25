@@ -1,6 +1,6 @@
 package entity;
 
-public class Customer {
+public class CustomerDTO {
     private int id;
     private String name;
     private String surname;
@@ -8,14 +8,14 @@ public class Customer {
     private String phone;
     private double balance;
 
-    public Customer() {
+    public CustomerDTO() {
     }
 
-    public Customer(int id) {
+    public CustomerDTO(int id) {
         this.id = id;
     }
 
-    public Customer(int id, String name, String surname, String email, String phone, double balance) {
+    public CustomerDTO(int id, String name, String surname, String email, String phone, double balance) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -24,7 +24,7 @@ public class Customer {
         this.balance = balance;
     }
 
-    public Customer(String name, String surname, String email, String phone, double balance) {
+    public CustomerDTO(String name, String surname, String email, String phone, double balance) {
         this.name = name;
         this.surname = surname;
         this.email = email;
@@ -82,7 +82,7 @@ public class Customer {
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("CustomerDAO{");
+        final StringBuffer sb = new StringBuffer("CustomerDTO{");
         sb.append("id=").append(id);
         sb.append(", name='").append(name).append('\'');
         sb.append(", surname='").append(surname).append('\'');

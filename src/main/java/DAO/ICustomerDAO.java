@@ -1,16 +1,18 @@
 package DAO;
 
-import entity.Customer;
+import entity.CustomerDTO;
 
 import java.sql.SQLException;
 import java.util.List;
 
 public interface ICustomerDAO {
-    List<Customer> findAll() throws SQLException;
+    List<CustomerDTO> findAll();
 
-    void update(Customer customer) throws SQLException;
+    CustomerDTO findById(CustomerDTO customer);
 
-    void save(Customer customer) throws SQLException;
+    void update(CustomerDTO customer);
 
-    void deleteById(Customer customer) throws SQLException;
+    void save(CustomerDTO customer);
+
+    void deleteById(CustomerDTO customer);
 }
