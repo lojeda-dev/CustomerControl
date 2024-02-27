@@ -58,34 +58,39 @@
                             <th>SURNAME</th>
                             <th>PHONE</th>
                             <th>BALANCE</th>
+                            <th>DELETE</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <% List<CustomerDTO> customers = new CustomerImplDAO().findAll();
+                        <%String routeDelete="ControllerCC?action=delete&id=" ; int idDelete=0;
+                            int i=1; List<CustomerDTO> customers = new
+                                    CustomerImplDAO().findAll();
                             double totalBalance = 0;
-                            for (int i = 0; i < customers.size(); i++) { String
-                                    edit="ControllerCC&action=edit&id=" ;%>
+                            for (CustomerDTO customerDTO : customers) {
+                        %>
                         <tr class="text-center">
                             <td>
-                                <%= customers.get(i).getId() %>
+                                <%= i++ %>
                             </td>
                             <td>
-                                <%= customers.get(i).getName() %>
+                                <%= customerDTO.getName() %>
                             </td>
                             <td>
-                                <%= customers.get(i).getSurname() %>
+                                <%= customerDTO.getSurname() %>
                             </td>
                             <td>
-                                <%= customers.get(i).getPhone() %>
+                                <%= customerDTO.getPhone() %>
                             </td>
-                            <td>$<%= customers.get(i).getBalance() %>
+                            <td>$<%= customerDTO.getBalance() %>
                             </td>
-                            <td><a href="<%=edit + customers.get(i).getId()%>"
-                                   class="btn btn-secondary"><i
-                                    class="fa-regular fa-pen-to-square"></i>Edit</a>
+                            <td>
+                                <a href="<%= routeDelete + customerDTO.getId() %>"
+                                   class="btn btn-secondary">
+                                    <i class="fa-solid fa-trash"></i>
+                                </a>
                             </td>
                         </tr>
-                        <% totalBalance +=customers.get(i).getBalance(); } %>
+                        <% totalBalance +=customerDTO.getBalance(); } %>
                         </tbody>
                     </table>
                 </div>
@@ -120,8 +125,26 @@
             <div class="modal-header bg-warning">
                 <h5 class="modal-title">ADD CUSTOMER</h5>
                 <button class="btn-close" data-bs-dismiss="modal"></button>
-                
             </div>
+            <form action="ControllerCC?action=add" method="post" class="was-validated">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="text" class="form-control m-2" name="name" placeholder="Name"
+                               required>
+                        <input type="text" class="form-control m-2" name="surname"
+                               placeholder="Surname" required>
+                        <input type="email" class="form-control m-2" name="email"
+                               placeholder="Email" required>
+                        <input type="number" class="form-control m-2" name="phone"
+                               placeholder="Phone" required>
+                        <input type="number" class="form-control m-2" name="balance"
+                               placeholder="Balance" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
