@@ -1,6 +1,6 @@
 package DAO;
 
-import SQLconnection.SQLconnection;
+import Connection.SQLconnection;
 import entity.CustomerDTO;
 
 import java.sql.*;

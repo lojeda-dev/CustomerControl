@@ -1,4 +1,4 @@
-package SQLconnection;
+package Connection;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 
