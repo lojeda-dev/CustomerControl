@@ -2,6 +2,7 @@
 <%@ page import="entity.CustomerDTO" %>
 <%@ page import="DAO.CustomerImplDAO" %>
 <%@ page contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
+
 <html>
 <meta>
 <meta charset="UTF-8">
@@ -9,43 +10,49 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous">
-<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="https://cdn-icons-png.flaticon.com/512/484/484664.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600&display=swap"
+      rel="stylesheet">
 <meta>
 
 <head>
     <title>Customer Control</title>
 </head>
 
-<body>
+<body style="position: relative; min-height: 100vh; padding-bottom: 3em;">
 
-<header id="header" class=" rajdhani-medium">
+<header class="bg-secondary text-white">
     <div class="container">
-        <div class="row">
-            <div class="col-md-8 bg-warning">
+        <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-md-8 d-flex justify-content-center align-items-center">
                 <i class="fa-solid fa-gear fa-2xl"></i>
-                <h1 class="my-3">CUSTOMER CONTROL</h1>
+                <h1 class="my-3" style="font-family: 'Rajdhani', sans-serif;
+                                    font-weight: 600; font-style: normal;">CUSTOMER CONTROL</h1>
                 <i class="fa-solid fa-gear fa-2xl"></i>
             </div>
         </div>
     </div>
 </header>
 
-<nav id="actions" class="py-4 rajdhani-light" style="background-color: #343a40;">
+<nav class="py-4"
+     style="font-family:'Rajdhani', sans-serif;font-weight: 500;font-style: normal;">
     <div class="container">
         <div class="row">
             <div class="d-flex justify-content-center">
-                <a href="#" class="btn btn-lg" data-bs-toggle="modal" data-bs-target="#addCustomer"
-                   style="background-color: #adb5bd; color: #343a40; font-family: Rajdhani, sans-serif; font-weight: 500; font-style: normal;">
+                <a href="#" class="btn btn-lg bg-secondary text-white" data-bs-toggle="modal"
+                   data-bs-target="#addCustomer">
                     <i class="fa-solid fa-plus"></i> ADD CUSTOMER</a>
             </div>
         </div>
     </div>
 </nav>
 
-<main id="customers">
+<main style="font-family:'Rajdhani', sans-serif;font-weight: 500;font-style: normal;">
     <div class="container">
         <div class="row">
-            <div class="col-md-12 btn-light">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header text-center">
                         <h4>CUSTOMER LIST</h4>
@@ -85,7 +92,7 @@
                             </td>
                             <td>
                                 <a href="<%= routeDelete + customerDTO.getId() %>"
-                                   class="btn btn-secondary">
+                                   class="btn bg-light">
                                     <i class="fa-solid fa-trash"></i>
                                 </a>
                             </td>
@@ -98,7 +105,7 @@
         </div>
         <div class="row">
             <div class="col-md-12 d-flex align-items-center justify-content-evenly">
-                <div class="card card-center bg-danger col-6 text-center">
+                <div class="card card-center bg-light col-6 text-center">
                     <div class="card-body">
                         <h4>TOTAL BALANCE</h4>
                         <h5 class="display-4">
@@ -106,7 +113,7 @@
                         </h5>
                     </div>
                 </div>
-                <div class="card card-center bg-success col-6 text-center">
+                <div class="card card-center bg-light col-6 text-center">
                     <div class="card-body">
                         <h4>TOTAL CLIENTS</h4>
                         <h5 class="display-4">
@@ -119,11 +126,12 @@
     </div>
 </main>
 
-<div class="modal" id="addCustomer">
+<div class="modal" id="addCustomer"
+     style="font-family:'Rajdhani', sans-serif;font-weight: 500;font-style: normal;;">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header bg-warning">
-                <h5 class="modal-title">ADD CUSTOMER</h5>
+            <div class="modal-header bg-secondary">
+                <h5 class="modal-title text-white">ADD CUSTOMER</h5>
                 <button class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <form action="ControllerCC?action=add" method="post" class="was-validated">
@@ -142,19 +150,22 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="submit" class="btn bg-secondary text-white">Save</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
 
-<footer id="footer" class="bg-warning py-1 rajdhani-light">
+<footer class="py-3 align-items-end bg-secondary text-white"
+        style="position: absolute; bottom: 0; width: 100%;">
     <div class="container">
         <div class="col">
-            <p class="text-center">
-                Copyright &copy;
-            </p>
+            <h6 class="text-center" style="font-family: 'Rajdhani', sans-serif;
+                                font-weight: 600;
+                                font-style: normal;">
+                COPYRIGHT &copy;
+            </h6>
         </div>
     </div>
 </footer>
