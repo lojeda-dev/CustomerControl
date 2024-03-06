@@ -15,21 +15,36 @@ public class CustomerServiceImpl implements ICustomerService {
 
     @Override
     public List<Customer> findAll() {
-        return null;
+        return customerRepository.findAll();
     }
 
     @Override
-    public void update(Long id) {
-
+    public Customer findById(Long id) {
+        return customerRepository.findById(id).orElse(null);
     }
 
     @Override
-    public void save(Customer customer) {
+    public Customer update(Long id, Customer customer) {
+        Customer c = customerRepository.findById(id).orElse(null);
 
+        if (c != null) {
+            c.setName(customer.getName());
+            c.setSurname(customer.getSurname());
+            c.setEmail(customer.getEmail());
+            c.setPhone(customer.getPhone());
+            c.setBalance(customer.getBalance());
+            customerRepository.save(c);
+        }
+        return c;
+    }
+
+    @Override
+    public Customer save(Customer customer) {
+        return customerRepository.save(customer);
     }
 
     @Override
     public void deleteById(Long id) {
-
+        customerRepository.deleteById(id);
     }
 }
