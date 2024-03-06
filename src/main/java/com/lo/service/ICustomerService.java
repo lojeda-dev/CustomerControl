@@ -8,9 +8,11 @@ public interface ICustomerService {
 
     List<Customer> findAll();
 
-    void update(Long id);
+    Customer findById(Long id);
 
-    void save(Customer customer);
+    Customer update(Long id, Customer customer);
+
+    Customer save(Customer customer);
 
     void deleteById(Long id);
 }

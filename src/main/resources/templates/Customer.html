@@ -1,15 +1,14 @@
-<html>
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
 <meta>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-      crossorigin="anonymous">
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/484/484664.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600&display=swap"
-      rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600&display=swap" rel="stylesheet">
 <meta>
 
 <head>
@@ -31,12 +30,11 @@
     </div>
 </header>
 
-<nav class="py-4"
-     style="font-family:'Rajdhani', sans-serif;font-weight: 500;font-style: normal;">
+<nav class="py-4" style="font-family:'Rajdhani', sans-serif;font-weight: 500;font-style: normal;">
     <div class="container">
         <div class="row">
             <div class="d-flex justify-content-center">
-                <a href="#" class="btn btn-lg bg-secondary text-white" data-bs-toggle="modal"
+                <a href="/customers/new" class="btn btn-lg bg-secondary text-white" data-bs-toggle="modal"
                    data-bs-target="#addCustomer">
                     <i class="fa-solid fa-plus"></i> ADD CUSTOMER</a>
             </div>
@@ -58,30 +56,33 @@
                             <th>#</th>
                             <th>NAME</th>
                             <th>SURNAME</th>
+                            <th>EMAIL</th>
                             <th>PHONE</th>
                             <th>BALANCE</th>
+                            <th>EDIT</th>
                             <th>DELETE</th>
                         </tr>
                         </thead>
                         <tbody>
-                       <tr class="text-center">
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                    <a href=""
-                                       class="btn bg-light">
-                                        <i class="fa-solid fa-trash"></i>
-                                    </a>
-                                </td>
-                            </tr>
+                        <tr class="text-center" th:each="c : ${customers}">
+                            <td th:text="${c.getId()}"></td>
+                            <td th:text="${c.getName()}"></td>
+                            <td th:text="${c.getSurname()}"></td>
+                            <td th:text="${c.getEmail()}"></td>
+                            <td th:text="${c.getPhone()}"></td>
+                            <td th:text="${c.getBalance()}"></td>
+                            <td>
+                                <a th:href="@{customers/edit/{id}(id = ${c.getId()})}" class="btn bg-light" data-bs-toggle="modal"
+                                   data-bs-target="#editCustomer">
+                                    <i class="fa-regular fa-pen-to-square"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <a th:href="@{customers/delete/{id}(id = ${c.getId()})}" class="btn bg-light">
+                                    <i class="fa-solid fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
@@ -93,6 +94,7 @@
                     <div class="card-body">
                         <h4>TOTAL BALANCE</h4>
                         <h5 class="display-4">
+                            <i th:text="${total}"></i>
                             <i class="fa-solid fa-money-bill-transfer"></i>
                         </h5>
                     </div>
@@ -101,6 +103,7 @@
                     <div class="card-body">
                         <h4>TOTAL CLIENTS</h4>
                         <h5 class="display-4">
+                            <i th:text="${customers.size()}"></i>
                             <i class="fa-solid fa-users"></i>
                         </h5>
                     </div>
@@ -111,26 +114,30 @@
 </main>
 
 <div class="modal" id="addCustomer"
-     style="font-family:'Rajdhani', sans-serif;font-weight: 500;font-style: normal;;">
+     style="font-family:'Rajdhani', sans-serif;font-weight: 500;font-style: normal;">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header bg-secondary">
                 <h5 class="modal-title text-white">ADD CUSTOMER</h5>
                 <button class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-            <form action="" method="post" class="was-validated">
+            <form th:object="${newCustomer}" th:action="@{customers/new}" method="post" class="was-validated">
                 <div class="modal-body">
                     <div class="form-group">
-                        <input type="text" class="form-control m-2" name="name" placeholder="Name"
-                               required>
-                        <input type="text" class="form-control m-2" name="surname"
-                               placeholder="Surname" required>
-                        <input type="email" class="form-control m-2" name="email"
-                               placeholder="Email" required>
-                        <input type="number" class="form-control m-2" name="phone"
-                               placeholder="Phone" required>
-                        <input type="number" class="form-control m-2" name="balance"
-                               placeholder="Balance" required>
+                        <input type="text" field="*{name}" class="form-control m-2" placeholder="Name" name="name"
+                               required >
+
+                        <input type="text"  field="*{surname}" class="form-control m-2" placeholder="Surname" name="surname"
+                               required >
+
+                        <input type="email"  field="*{email}" class="form-control m-2" placeholder="Email" name="email"
+                               required >
+
+                        <input type="number" field="*{phone}" class="form-control m-2" placeholder="Phone" name="phone"
+                               required >
+
+                        <input type="number"  field="*{balance}" class="form-control m-2" placeholder="Balance" name="balance"
+                               required >
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -141,8 +148,44 @@
     </div>
 </div>
 
-<footer class="py-3 align-items-end bg-secondary text-white"
-        style="position: absolute; bottom: 0; width: 100%;">
+<div class="modal" id="editCustomer"
+     style="font-family:'Rajdhani', sans-serif;font-weight: 500;font-style: normal;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-secondary">
+                <h5 class="modal-title text-white">EDIT CUSTOMER</h5>
+                <button class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form th:object="${editCustomer}" th:action="${editAction}" method="post" class="was-validated">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="hidden" field="*{id}">
+
+                        <input type="text" field="*{name}" class="form-control m-2" placeholder="Name" name="name"
+                               required >
+
+                        <input type="text" field="*{surname}" class="form-control m-2" placeholder="Surname" name="surname"
+                               required >
+
+                        <input type="email" field="*{email}" class="form-control m-2" placeholder="Email" name="email"
+                               required >
+
+                        <input type="number" field="*{phone}" class="form-control m-2" placeholder="Phone" name="phone"
+                               required >
+
+                        <input type="number" field="*{balance}" class="form-control m-2" placeholder="Balance" name="balance"
+                               required >
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn bg-secondary text-white">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<footer class="py-3 align-items-end bg-secondary text-white" style="position: absolute; bottom: 0; width: 100%;">
     <div class="container">
         <div class="col">
             <h6 class="text-center" style="font-family: 'Rajdhani', sans-serif;
